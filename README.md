@@ -11,21 +11,21 @@ Laravel ZendLDAP Auth
 
 ### Pre-Config
 
-This bundles include 3 library only.
+This bundles include 3 libraries only.
 - Application
 - Ldap
 - Loader
 
 Disable , If you already use zend framework v.1
 
-*bundles/zendldap/start.php*
+*bundles/zendldapauth/start.php*
 ```php
 set_include_path(implode(PATH_SEPARATOR, array(
     __DIR__ . '/libraries',
     get_include_path(),
 )));
 
-require_once Bundle::path('zendldap') . '/libraries/Zend/Loader/Autoloader.php';
+require_once Bundle::path('zendldapauth') . '/libraries/Zend/Loader/Autoloader.php';
 
 $autoloader = Zend_Loader_Autoloader::getInstance();
 ```
