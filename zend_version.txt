@@ -1,0 +1,2 @@
+path: library/Zend
+version: 1.12.3
