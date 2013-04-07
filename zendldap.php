@@ -69,7 +69,7 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 
 		$checkRDN = $this->conn->exists($token);
 
-		if ( $checkRDN ) {
+		if ($checkRDN) {
 			return $this->get_user_object($token);
 		}
 	}
@@ -86,9 +86,9 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 		$password = $arguments['password'];
 
 		// bind user
-		$bind = $this->conn->bind($username,$password);
+		$checkBind = $this->conn->bind($username,$password);
 
-		if ($bind) 
+		if ($checkBind) 
 		{
 			// get rdn from baseDN
 			$rdn =  $this->get_rdn($username);
@@ -107,7 +107,7 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 	 * @param  string $username
 	 * @return string
 	 */
-	public function get_rdn($username) 
+	protected function get_rdn($username) 
 	{	
 		$accountForm = $this->config['accountCanonicalForm'];
 		$rdn = $this->conn->getCanonicalAccountName($username, $accountForm);
@@ -115,7 +115,7 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 	}
 
 	/**
-	 * retrun attributes after function attempt()
+	 * fetch attributes to Auth::user();
 	 *
 	 * @param  string $rdn
 	 * @return array
