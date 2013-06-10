@@ -122,12 +122,27 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 	 */
 	protected function get_user_object($rdn) 
 	{
+		// user attribute 
 		$userInfo = $this->conn->getNode($rdn);
 		
 		foreach ( $this->config_options_attributes as $k => $attr ) 
 		{
 			$user[$attr] = $userInfo->$attr;
 	    }
+	    
+	    // group attributes
+	    $groupdn = $this->config_options['groupdn'];
+	    $filter = sprintf('%s=%s',$this->config_options['group_member'],$rdn);
+	    $attributes = $this->config_options['group_attribute'];
+	    
+	    $search = $this->conn->search($filter, $groupdn,
+	    		Zend_Ldap::SEARCH_SCOPE_SUB, $attributes);
+
+	    foreach( $search as $value)
+		{
+			$user['group'][] = strtolower(current(current($value)));
+		}
+		
 		return (object) $user;	
 	}
 }
