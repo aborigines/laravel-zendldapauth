@@ -107,7 +107,7 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 	 * @param  string $username
 	 * @return string
 	 */
-	protected function get_rdn($username) 
+	public function get_rdn($username) 
 	{	
 		$accountForm = $this->config['accountCanonicalForm'];
 		$rdn = $this->conn->getCanonicalAccountName($username, $accountForm);
@@ -146,4 +146,3 @@ class ZendLDAP extends \Laravel\Auth\Drivers\Driver {
 		return (object) $user;	
 	}
 }
-

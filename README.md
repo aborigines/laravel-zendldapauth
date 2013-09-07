@@ -66,10 +66,6 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 	'ldap_options' => array(
 		// request for Auth::user() , return attributes after login
 		'attributes' => array('dn','uid','cn','sn','givenname','pwdchangedtime'),
-        // group attributes
-        'groupdn' => 'ou=group,dc=example,dc=com',
-        'group_attribute' => 'cn',
-        'group_member' => 'roleOccupant',
 	),
 ```
 
